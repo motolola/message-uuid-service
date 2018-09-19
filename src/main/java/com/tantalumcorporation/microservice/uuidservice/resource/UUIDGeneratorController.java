@@ -26,7 +26,6 @@ public class UUIDGeneratorController {
     public String generateUUID()
     {
         UUID uuid =  UUID.randomUUID();
-        System.out.println(uuid);
-        return uuidPrefix+uuid+uuidSurfix;
+        return uuidPrefix+"-"+uuid+"-"+uuidSurfix;
     }
 }
