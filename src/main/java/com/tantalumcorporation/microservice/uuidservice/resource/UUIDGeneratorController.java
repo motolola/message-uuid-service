@@ -1,5 +1,7 @@
 package com.tantalumcorporation.microservice.uuidservice.resource;
 
+import com.tantalumcorporation.microservice.uuidservice.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,21 +13,13 @@ import java.util.UUID;
 @RequestMapping("api")
 public class UUIDGeneratorController {
 
-    @Value("${app.uuid.prefix}")
-    private String uuidPrefix;
+    @Autowired
+    private Configuration configuration;
 
-    @Value("${app.uuid.surfix}")
-    private String uuidSurfix;
-
-    @GetMapping("test")
-    public String test()
-    {
-        return "Your UUID";
-    }
     @GetMapping("get_uuid")
     public String generateUUID()
     {
         UUID uuid =  UUID.randomUUID();
-        return uuidPrefix+"-"+uuid+"-"+uuidSurfix;
+        return configuration.getPrefix()+"-"+uuid+"-"+configuration.getSurfix();
     }
 }
